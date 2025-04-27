@@ -18,7 +18,7 @@ function update_furnaces()
   local newFurnace = false
   for _, furnace in ipairs(peripherals) do
     if string.find(furnace, "furnace") then
-      furnacePeripheral = peripheral.wrap(furnace)
+      local furnacePeripheral = peripheral.wrap(furnace)
       if not table.contains(furnaces, furnacePeripheral) then
         table.insert(furnaces, furnacePeripheral)
         newFurnace = true
