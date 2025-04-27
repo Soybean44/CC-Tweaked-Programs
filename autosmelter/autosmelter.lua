@@ -65,6 +65,8 @@ function distribute_items(chest)
       idx = idx + 1
       currItem = items[idx].peripheral.getItemDetail(items[idx].slot)
       furnace.pullItems(peripheral.getName(chest), items[idx].slot, delta, 1)
+    elseif avgCount <= currItem.count then
+      break
     end
   end
 end
