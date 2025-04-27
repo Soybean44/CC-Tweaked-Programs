@@ -2,12 +2,13 @@ local peripherals = peripheral.getNames()
 local furnaces = {}
 local drawer = peripheral.find("storagedrawers:standard_drawers_1")
 
-for _, furnace in ipairs(peripherals) do
-  if string.find(furnace, "furnace") then
-    table.insert(furnaces, peripheral.wrap(furnace))
+function update_furnaces()
+  for _, furnace in ipairs(peripherals) do
+    if string.find(furnace, "furnace") then
+      table.insert(furnaces, peripheral.wrap(furnace))
+    end
   end
 end
-
 
 function balance_coal()
   local drawerItem = drawer.getItemDetail(2)
@@ -73,7 +74,9 @@ print("Enter input chest name: ")
 local inputChest = peripheral.wrap(io.input(io.stdin):read())
 print("\nEnter output chest name: ")
 local outputChest = peripheral.wrap(io.input(io.stdin):read())
+print("\nRunning Autosmelter")
 while true do
+  update_furnaces()
   balance_coal()
   distribute_items(inputChest)
   get_items(outputChest)
