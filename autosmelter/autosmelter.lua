@@ -8,7 +8,7 @@ function balance_coal()
   if drawerItem ~= nil then
     totalCoal = drawerItem.count
   end
-  local avgCoal = totalCoal / #furnaces
+  local avgCoal = math.floor(totalCoal / #furnaces)
   for _, furnace in ipairs(furnaces) do
     furnace.pullItems(peripheral.getName(drawer), 2, avgCoal, 2)
   end
@@ -55,7 +55,7 @@ function distribute_items(chest)
     return
   end
 
-  local avgCount = count / #furnaces
+  local avgCount = math.ceil(count / #furnaces)
   local idx = 1
   for _, furnace in ipairs(furnaces) do
     local currItem = items[idx].peripheral.getItemDetail(items[idx].slot)
