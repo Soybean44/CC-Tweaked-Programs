@@ -3,7 +3,7 @@ local furnaces = {}
 local drawer = peripheral.find("storagedrawers:standard_drawers_1")
 
 for _, furnace in ipairs(peripherals) do
-  if string.find(item, "furnace") then
+  if string.find(furnace, "furnace") then
     table.insert(furnaces, peripheral.wrap(furnace))
   end
 end
@@ -11,7 +11,7 @@ end
 
 function balance_coal()
   local drawerItem = drawer.getItemDetail(2)
-  local drawerCoal = 0
+  local totalCoal = 0
   if drawerItem ~= nil then
     totalCoal = drawerItem.count
   end
@@ -67,9 +67,9 @@ end
 
 print("Welcome to Autosmelter\n")
 print("Enter input chest name: ")
-local inputChest = io.input(io.stdin):read()
+local inputChest = peripheral.wrap(io.input(io.stdin):read())
 print("\nEnter output chest name: ")
-local outputChest = io.input(io.stdin):read()
+local outputChest = peripheral.wrap(io.input(io.stdin):read())
 while true do
   balance_coal()
   distribute_items(inputChest)
