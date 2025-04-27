@@ -15,14 +15,19 @@ function balance_coal()
 end
 
 function update_furnaces()
-  if #furnaces ~= 0 then
-    for _, furnace in ipairs(furnaces) do
-      furnace.pushItems(peripheral.getName(drawer), 2)
-    end
-  end
+  local newFurnace = false
   for _, furnace in ipairs(peripherals) do
     if string.find(furnace, "furnace") then
-      table.insert(furnaces, peripheral.wrap(furnace))
+      furnacePeripheral = peripheral.wrap(furnace)
+      if not table.contains(furnaces, furnacePeripheral) then
+        table.insert(furnaces, furnacePeripheral)
+        newFurnace = true
+      end
+    end
+  end
+  if newFurnace then
+    for _, furnace in ipairs(furnaces) do
+      furnace.pushItems(peripheral.getName(drawer), 2)
     end
   end
   balance_coal()
