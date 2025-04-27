@@ -45,6 +45,10 @@ function distribute_items(chest)
     end
   end
 
+  if count == 0 then
+    return
+  end
+
   local avgCount = count / #furnaces
   local idx = 1
   local currItem = items[idx].peripheral.getItemDetail(items[idx].slot)
