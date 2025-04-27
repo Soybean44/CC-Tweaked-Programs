@@ -55,18 +55,22 @@ function distribute_items(chest)
     return
   end
 
-  local avgCount = math.ceil(count / #furnaces)
+  local avgCount = count / #furnaces
+  if avgCount < 1 and avgCount > 0 then
+    avgCount = 1
+  end
   local idx = 1
   for _, furnace in ipairs(furnaces) do
     local currItem = items[idx].peripheral.getItemDetail(items[idx].slot)
+    if currItem ~= nil then
+      break
+    end
     furnace.pullItems(peripheral.getName(chest), items[idx].slot, avgCount, 1)
     if currItem.count <= avgCount and idx ~= #items then
       local delta = avgCount - currItem.count
       idx = idx + 1
       currItem = items[idx].peripheral.getItemDetail(items[idx].slot)
       furnace.pullItems(peripheral.getName(chest), items[idx].slot, delta, 1)
-    elseif avgCount <= currItem.count then
-      break
     end
   end
 end
