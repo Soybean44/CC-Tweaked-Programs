@@ -4,7 +4,7 @@ local drawer = peripheral.find("storagedrawers:standard_drawers_1")
 
 for _, furnace in ipairs(peripherals) do
   if string.find(item, "furnace") then
-    table.insert(furnaces, peripheral.wrap(furnace)
+    table.insert(furnaces, peripheral.wrap(furnace))
   end
 end
 
