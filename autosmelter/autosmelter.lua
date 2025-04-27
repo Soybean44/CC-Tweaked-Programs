@@ -14,30 +14,15 @@ function balance_coal()
   end
 end
 
-function table_contains(table, value)
-  for k, v in pairs(table) do
-    if value == v then
-      return true
-    end
-  end
-  return false
-end
-
 function update_furnaces()
-  local newFurnace = false
   for _, furnace in ipairs(peripherals) do
     if string.find(furnace, "furnace") then
       local furnacePeripheral = peripheral.wrap(furnace)
-      if not table_contains(furnaces, furnacePeripheral) then
-        table.insert(furnaces, furnacePeripheral)
-        newFurnace = true
-      end
+      table.insert(furnaces, furnacePeripheral)
     end
   end
-  if newFurnace then
-    for _, furnace in ipairs(furnaces) do
-      furnace.pushItems(peripheral.getName(drawer), 2)
-    end
+  for _, furnace in ipairs(furnaces) do
+    furnace.pushItems(peripheral.getName(drawer), 2)
   end
   balance_coal()
 end
@@ -94,9 +79,10 @@ print("Enter input chest name: ")
 local inputChest = peripheral.wrap(io.input(io.stdin):read())
 print("\nEnter output chest name: ")
 local outputChest = peripheral.wrap(io.input(io.stdin):read())
+update_furnaces()
 print("\nRunning Autosmelter")
 while true do
-  update_furnaces()
+  balance_coal()
   distribute_items(inputChest)
   get_items(outputChest)
 end
