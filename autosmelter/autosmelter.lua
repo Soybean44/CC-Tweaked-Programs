@@ -59,6 +59,7 @@ function distribute_items(chest)
   local idx = 1
   local currItem = items[idx].peripheral.getItemDetail(items[idx].slot)
   for _, furnace in ipairs(furnaces) do
+    furnace.pullItems(peripheral.getName(chest), items[idx].slot, avgCount, 1)
     if currItem.count <= avgCount and idx == #items then
       local delta = avgCount - currItem.count
       idx = idx + 1
