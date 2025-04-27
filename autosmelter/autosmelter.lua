@@ -14,7 +14,7 @@ function balance_coal()
   end
 end
 
-function table_contains(table, value):
+function table_contains(table, value)
   for k, v in pairs(table) do
     if value == v then
       return true
