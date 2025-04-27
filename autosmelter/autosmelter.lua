@@ -25,7 +25,7 @@ local smeltingItem = nil
 function distribute_items(chest)
   local items = {}
   local count = 0
-  for _, furnace in ipairs(furnaces do
+  for _, furnace in ipairs(furnaces) do
     local furnaceItem = furnace.getItemDetail(1)
     if furnaceItem ~= nil then
       if furnaceItem.name ~= smeltingItem then
@@ -34,14 +34,14 @@ function distribute_items(chest)
       break
     end
   end
-  
+
   for slot, item in pairs(chest.list()) do
     if smeltingItem == nil then
       smeltingItem = item.name
     end
     if smeltingItem == item.name then
       count = count + item.count
-      table.insert(items, {peripheral = chest, slot = slot})
+      table.insert(items, { peripheral = chest, slot = slot })
     end
   end
 
@@ -75,4 +75,3 @@ while true do
   distribute_items(inputChest)
   get_items(outputChest)
 end
-
