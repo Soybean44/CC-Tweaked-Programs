@@ -14,12 +14,21 @@ function balance_coal()
   end
 end
 
+function table_contains(table, value):
+  for k, v in pairs(table) do
+    if value == v then
+      return true
+    end
+  end
+  return false
+end
+
 function update_furnaces()
   local newFurnace = false
   for _, furnace in ipairs(peripherals) do
     if string.find(furnace, "furnace") then
       local furnacePeripheral = peripheral.wrap(furnace)
-      if not table.contains(furnaces, furnacePeripheral) then
+      if not table_contains(furnaces, furnacePeripheral) then
         table.insert(furnaces, furnacePeripheral)
         newFurnace = true
       end
