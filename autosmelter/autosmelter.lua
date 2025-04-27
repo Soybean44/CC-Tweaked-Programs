@@ -2,14 +2,6 @@ local peripherals = peripheral.getNames()
 local furnaces = {}
 local drawer = peripheral.find("storagedrawers:standard_drawers_1")
 
-function update_furnaces()
-  for _, furnace in ipairs(peripherals) do
-    if string.find(furnace, "furnace") then
-      table.insert(furnaces, peripheral.wrap(furnace))
-    end
-  end
-end
-
 function balance_coal()
   local drawerItem = drawer.getItemDetail(2)
   local totalCoal = 0
@@ -20,6 +12,20 @@ function balance_coal()
   for _, furnace in ipairs(furnaces) do
     furnace.pullItems(peripheral.getName(drawer), 2, avgCoal, 2)
   end
+end
+
+function update_furnaces()
+  if #furnaces ~= 0 then
+    for _, furnace in ipairs(furnaces) do
+      furnace.pushItems(peripheral.getName(drawer), 2)
+    end
+  end
+  for _, furnace in ipairs(peripherals) do
+    if string.find(furnace, "furnace") then
+      table.insert(furnaces, peripheral.wrap(furnace))
+    end
+  end
+  balance_coal()
 end
 
 local smeltingItem = nil
@@ -77,7 +83,6 @@ local outputChest = peripheral.wrap(io.input(io.stdin):read())
 print("\nRunning Autosmelter")
 while true do
   update_furnaces()
-  balance_coal()
   distribute_items(inputChest)
   get_items(outputChest)
 end
