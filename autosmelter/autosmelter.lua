@@ -31,14 +31,20 @@ local smeltingItem = nil
 function distribute_items(chest)
   local items = {}
   local count = 0
+  local isSmelting = false
   for _, furnace in ipairs(furnaces) do
     local furnaceItem = furnace.getItemDetail(1)
     if furnaceItem ~= nil then
+      isSmelting = true
       if furnaceItem.name ~= smeltingItem then
         return
       end
       break
     end
+  end
+
+  if not isSnelting then
+    smeltingItem = nil
   end
 
   for slot, item in pairs(chest.list()) do
