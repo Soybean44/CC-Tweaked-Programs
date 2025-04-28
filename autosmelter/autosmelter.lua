@@ -89,7 +89,7 @@ end
 print("Welcome to Autosmelter\n")
 
 -- read cfg
-local cfg = fs.open("autosmelter.cfg")
+local cfg = fs.open("autosmelter.cfg", "r")
 local inputChest = peripheral.wrap(cfg.readLine())
 local outputChest = peripheral.wrap(cfg.readLine())
 
