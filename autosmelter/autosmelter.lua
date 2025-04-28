@@ -87,10 +87,12 @@ function get_items(chest)
 end
 
 print("Welcome to Autosmelter\n")
-print("Enter input chest name: ")
-local inputChest = peripheral.wrap(io.input(io.stdin):read())
-print("\nEnter output chest name: ")
-local outputChest = peripheral.wrap(io.input(io.stdin):read())
+
+-- read cfg
+local cfg = fs.open("autosmelter.cfg")
+local inputChest = peripheral.wrap(cfg.readLine())
+local outputChest = peripheral.wrap(cfg.readLine())
+
 update_furnaces()
 print("\nRunning Autosmelter")
 while true do
