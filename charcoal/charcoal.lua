@@ -3,8 +3,7 @@ function setup()
   turtle.suckDown(27)
   if turtle.getItemCount(1) ~= 27 then
     turtle.dropDown(64)
-    print("Error Invalid ammount of items in drawer/turtle")
-    return
+    error("Error Invalid ammount of items in drawer/turtle")
   end
   turtle.forward()
   turtle.digDown()
@@ -82,8 +81,7 @@ end
 
 function harvest()
   if turtle.getItemCount(1) ~= 0 then
-    print("Error Invalid ammount of items in turtle")
-    return
+    error("Error Invalid ammount of items in turtle")
   end
   turtle.select(2)
   turtle.forward()
