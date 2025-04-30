@@ -1,6 +1,11 @@
 function setup()
   turtle.select(1)
   turtle.suckUp(27)
+  if turtle.getItemCount(1) ~= 27 then
+    turtle.pushDown(64)
+    print("Error Invalid ammount of items in drawer/turtle")
+    return
+  end
   turtle.forward()
   turtle.digDown()
   turtle.down()
