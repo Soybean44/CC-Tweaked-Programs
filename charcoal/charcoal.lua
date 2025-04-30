@@ -145,6 +145,10 @@ function harvest()
   turtle.forward()
   turtle.forward()
   turtle.dropDown(64)
+  if turtle.getFuelLevel() <= 80 then
+    turtle.suckDown(2)
+    turtle.refuel(2)
+  end
   turtle.turnLeft()
   turtle.turnLeft()
   turtle.forward()
